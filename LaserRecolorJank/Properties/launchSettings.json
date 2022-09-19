@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Launch Neos": {
+      "commandName": "Executable",
+      "executablePath": "F:\\Neos\\app\\Neos.exe",
+      "commandLineArgs": "-Screen -Invisible -LoadAssembly \"Libraries/NeosModLoader.dll\" -DontAutoOpenCloudHome",
+      "workingDirectory": "F:\\Neos\\app"
+    }
+  }
+}
