@@ -61,9 +61,9 @@ namespace LaserRecolorJank
         private static ModConfigurationKey<color> RIGHT_FAR = new ModConfigurationKey<color>("right_far", "Right Far Color", () => new color(.25F, 1F, 1F, 1F));
 
         [AutoRegisterConfigKey]
-        private static ModConfigurationKey<string> RIGHT_NEAR_VAR = new ModConfigurationKey<string>("right_near_var", "Right Near Color Dynamic Variable", () => null);
+        private static ModConfigurationKey<string> RIGHT_NEAR_VAR = new ModConfigurationKey<string>("right_near_var", "Right Near Color Dynamic Variable", () => "");
         [AutoRegisterConfigKey]
-        private static ModConfigurationKey<string> RIGHT_FAR_VAR = new ModConfigurationKey<string>("right_far_var", "Right Far Color Dynamic Variable", () => null);
+        private static ModConfigurationKey<string> RIGHT_FAR_VAR = new ModConfigurationKey<string>("right_far_var", "Right Far Color Dynamic Variable", () => "");
 
         [AutoRegisterConfigKey]
         private static ModConfigurationKey<float>   RIGHT_CURSOR_SCALE = new ModConfigurationKey<float>("right_cursor_scale", "The scale of the right cursor", () => 1F);
@@ -93,9 +93,9 @@ namespace LaserRecolorJank
         private static ModConfigurationKey<color> LEFT_FAR = new ModConfigurationKey<color>("left_far", "Left Far Color", () => new color(.25F, 1F, 1F, 1F));
         
         [AutoRegisterConfigKey]
-        private static ModConfigurationKey<string> LEFT_NEAR_VAR = new ModConfigurationKey<string>("left_near_var", "Left Near Color Dynamic Variable", () => null);
+        private static ModConfigurationKey<string> LEFT_NEAR_VAR = new ModConfigurationKey<string>("left_near_var", "Left Near Color Dynamic Variable", () => "");
         [AutoRegisterConfigKey]
-        private static ModConfigurationKey<string> LEFT_FAR_VAR = new ModConfigurationKey<string>("left_far_var", "Left Far Color Dynamic Variable", () => null);
+        private static ModConfigurationKey<string> LEFT_FAR_VAR = new ModConfigurationKey<string>("left_far_var", "Left Far Color Dynamic Variable", () => "");
 
         [AutoRegisterConfigKey]
         private static ModConfigurationKey<float>   LEFT_CURSOR_SCALE = new ModConfigurationKey<float>("left_cursor_scale", "The scale of the left cursor", () => 1F);
