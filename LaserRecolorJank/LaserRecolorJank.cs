@@ -23,7 +23,7 @@ namespace LaserRecolorJank
 
 		public override String Link => "https://github.com/Ap6661/LaserRecolorJank";
 
-		public override String Version => "2.0.0";
+		public override String Version => "2.0.1";
 
 		private static Uri[] DefaultCursors = { OfficialAssets.Graphics.Icons.Laser.Cursor,
 			OfficialAssets.Graphics.Icons.Laser.GrabCursor,
@@ -316,7 +316,7 @@ namespace LaserRecolorJank
 
 			var Conditional = driver.AttachComponent<ValueConditional<colorX>>();
 				Conditional.OnTrue.TrySet(Mul);
-				Conditional.OnFalse.TrySet(DefaultSource);
+				Conditional.OnFalse.TrySet(DesiredSource);
 				Conditional.Condition.TrySet(ReactiveSource);
 
 
