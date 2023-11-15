@@ -23,7 +23,7 @@ namespace LaserRecolorJank
 
 		public override String Link => "https://github.com/Ap6661/LaserRecolorJank";
 
-		public override String Version => "2.0.1";
+		public override String Version => "2.0.2";
 
 		private static Uri[] DefaultCursors = { OfficialAssets.Graphics.Icons.Laser.Cursor,
 			OfficialAssets.Graphics.Icons.Laser.GrabCursor,
@@ -160,8 +160,6 @@ namespace LaserRecolorJank
 						Mesh.Radius.Value = 0.002f;
 						Mesh.Sides.Value = 6;
 						Mesh.Segments.Value = 16;
-						Mesh.Ends.Value = SegmentedBuilder.Ends.Capped;
-						Mesh.Shading.Value = SegmentedBuilder.Shading.Smooth;
 
 						____startColor.Value = ColS.Value.ReferenceID;
 						____endColor.Value = ColE.Value.ReferenceID;
