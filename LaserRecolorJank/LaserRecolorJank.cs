@@ -34,25 +34,25 @@ namespace LaserRecolorJank
 			OfficialAssets.Graphics.Icons.Laser.SliderVerticalCursor,
 			OfficialAssets.Graphics.Icons.Laser.TypingCursor};
 
-		private static List<Sync<bool>> ReactiveEnableds = new List<Sync<bool>>();
-		private static List<Sync<colorX>> RightNearColors = new List<Sync<colorX>>();
-		private static List<Sync<colorX>> RightFarColors = new List<Sync<colorX>>();
-		private static List<Sync<colorX>> LeftNearColors = new List<Sync<colorX>>();
-		private static List<Sync<colorX>> LeftFarColors = new List<Sync<colorX>>();
-		private static List<Sync<string>> RightNearVars = new List<Sync<string>>();
-		private static List<Sync<string>> RightFarVars = new List<Sync<string>>();
-		private static List<Sync<string>> LeftNearVars = new List<Sync<string>>();
-		private static List<Sync<string>> LeftFarVars = new List<Sync<string>>();
+		private static List<Sync<bool>>   ReactiveEnableds = new List<Sync<bool>>();
+		private static List<Sync<colorX>> RightNearColors  = new List<Sync<colorX>>();
+		private static List<Sync<colorX>> RightFarColors   = new List<Sync<colorX>>();
+		private static List<Sync<colorX>> LeftNearColors   = new List<Sync<colorX>>();
+		private static List<Sync<colorX>> LeftFarColors    = new List<Sync<colorX>>();
+		private static List<Sync<string>> RightNearVars    = new List<Sync<string>>();
+		private static List<Sync<string>> RightFarVars     = new List<Sync<string>>();
+		private static List<Sync<string>> LeftNearVars     = new List<Sync<string>>();
+		private static List<Sync<string>> LeftFarVars      = new List<Sync<string>>();
 
 
 		public static ModConfiguration config;
 
 		[AutoRegisterConfigKey]
-		private static ModConfigurationKey<bool> ENABLED = new ModConfigurationKey<bool>("enabled", "Enabled", () => true);
+		private static ModConfigurationKey<bool>  ENABLED = new ModConfigurationKey<bool>("enabled", "Enabled", () => true);
 		[AutoRegisterConfigKey]
-		private static ModConfigurationKey<bool> REACTIVE = new ModConfigurationKey<bool>("color_reactive", "Color Reacts to enviornment and inputs", () => true);
+		private static ModConfigurationKey<bool>  REACTIVE = new ModConfigurationKey<bool>("color_reactive", "Color Reacts to enviornment and inputs", () => true);
 		[AutoRegisterConfigKey]
-		private static ModConfigurationKey<bool> CURSOR_ENABLED = new ModConfigurationKey<bool>("cursor_enabled", "Enables custom cursors", () => true);
+		private static ModConfigurationKey<bool>  CURSOR_ENABLED = new ModConfigurationKey<bool>("cursor_enabled", "Enables custom cursors", () => true);
 
 
 
@@ -67,23 +67,23 @@ namespace LaserRecolorJank
 		private static ModConfigurationKey<string> RIGHT_FAR_VAR = new ModConfigurationKey<string>("right_far_var", "Right Far Color Dynamic Variable", () => "");
 
 		[AutoRegisterConfigKey]
-		private static ModConfigurationKey<float> RIGHT_CURSOR_SCALE = new ModConfigurationKey<float>("right_cursor_scale", "The scale of the right cursor", () => 1F);
+		private static ModConfigurationKey<float>   RIGHT_CURSOR_SCALE = new ModConfigurationKey<float>("right_cursor_scale", "The scale of the right cursor", () => 1F);
 		[AutoRegisterConfigKey]
-		private static ModConfigurationKey<Uri> RIGHT_CURSOR = new ModConfigurationKey<Uri>("right_cursor", "Right Cursor Icon", () => null);
+		private static ModConfigurationKey<Uri>   RIGHT_CURSOR = new ModConfigurationKey<Uri>("right_cursor", "Right Cursor Icon", () => null);
 		[AutoRegisterConfigKey]
-		private static ModConfigurationKey<Uri> RIGHT_GRAB = new ModConfigurationKey<Uri>("right_grab", "Right Grab Icon", () => null);
+		private static ModConfigurationKey<Uri>   RIGHT_GRAB = new ModConfigurationKey<Uri>("right_grab", "Right Grab Icon", () => null);
 		[AutoRegisterConfigKey]
-		private static ModConfigurationKey<Uri> RIGHT_GRAB_HOVER = new ModConfigurationKey<Uri>("right_grab_hover", "Right Grab Hover Icon", () => null);
+		private static ModConfigurationKey<Uri>   RIGHT_GRAB_HOVER = new ModConfigurationKey<Uri>("right_grab_hover", "Right Grab Hover Icon", () => null);
 		[AutoRegisterConfigKey]
-		private static ModConfigurationKey<Uri> RIGHT_INTERACT = new ModConfigurationKey<Uri>("right_interact", "Right Interact Icon", () => null);
+		private static ModConfigurationKey<Uri>   RIGHT_INTERACT = new ModConfigurationKey<Uri>("right_interact", "Right Interact Icon", () => null);
 		[AutoRegisterConfigKey]
-		private static ModConfigurationKey<Uri> RIGHT_SLIDER_BOTH = new ModConfigurationKey<Uri>("right_double_slider", "Right Double Slider Icon", () => null);
+		private static ModConfigurationKey<Uri>   RIGHT_SLIDER_BOTH = new ModConfigurationKey<Uri>("right_double_slider", "Right Double Slider Icon", () => null);
 		[AutoRegisterConfigKey]
-		private static ModConfigurationKey<Uri> RIGHT_SLIDER_HORIZONTAL = new ModConfigurationKey<Uri>("right_slider_horizontal", "Right Slider Horizontal Icon", () => null);
+		private static ModConfigurationKey<Uri>   RIGHT_SLIDER_HORIZONTAL = new ModConfigurationKey<Uri>("right_slider_horizontal", "Right Slider Horizontal Icon", () => null);
 		[AutoRegisterConfigKey]
-		private static ModConfigurationKey<Uri> RIGHT_SLIDER_VERTICAL = new ModConfigurationKey<Uri>("right_slider_vertical", "Right Slider Vertical Icon", () => null);
+		private static ModConfigurationKey<Uri>   RIGHT_SLIDER_VERTICAL = new ModConfigurationKey<Uri>("right_slider_vertical", "Right Slider Vertical Icon", () => null);
 		[AutoRegisterConfigKey]
-		private static ModConfigurationKey<Uri> RIGHT_TYPING = new ModConfigurationKey<Uri>("right_typing", "Right Typing Icon", () => null);
+		private static ModConfigurationKey<Uri>   RIGHT_TYPING = new ModConfigurationKey<Uri>("right_typing", "Right Typing Icon", () => null);
 
 
 
@@ -99,23 +99,28 @@ namespace LaserRecolorJank
 		private static ModConfigurationKey<string> LEFT_FAR_VAR = new ModConfigurationKey<string>("left_far_var", "Left Far Color Dynamic Variable", () => "");
 
 		[AutoRegisterConfigKey]
-		private static ModConfigurationKey<float> LEFT_CURSOR_SCALE = new ModConfigurationKey<float>("left_cursor_scale", "The scale of the left cursor", () => 1F);
+		private static ModConfigurationKey<float>   LEFT_CURSOR_SCALE = new ModConfigurationKey<float>("left_cursor_scale", "The scale of the left cursor", () => 1F);
 		[AutoRegisterConfigKey]
-		private static ModConfigurationKey<Uri> LEFT_CURSOR = new ModConfigurationKey<Uri>("left_cursor", "Left Cursor Icon", () => null);
+		private static ModConfigurationKey<Uri>   LEFT_CURSOR = new ModConfigurationKey<Uri>("left_cursor", "Left Cursor Icon", () => null);
 		[AutoRegisterConfigKey]
-		private static ModConfigurationKey<Uri> LEFT_GRAB = new ModConfigurationKey<Uri>("left_grab", "Left Grab Icon", () => null);
+		private static ModConfigurationKey<Uri>   LEFT_GRAB = new ModConfigurationKey<Uri>("left_grab", "Left Grab Icon", () => null);
 		[AutoRegisterConfigKey]
-		private static ModConfigurationKey<Uri> LEFT_GRAB_HOVER = new ModConfigurationKey<Uri>("left_grab_hover", "Left Grab Hover Icon", () => null);
+		private static ModConfigurationKey<Uri>   LEFT_GRAB_HOVER = new ModConfigurationKey<Uri>("left_grab_hover", "Left Grab Hover Icon", () => null);
 		[AutoRegisterConfigKey]
-		private static ModConfigurationKey<Uri> LEFT_INTERACT = new ModConfigurationKey<Uri>("left_interact", "Left Interact Icon", () => null);
+		private static ModConfigurationKey<Uri>   LEFT_INTERACT = new ModConfigurationKey<Uri>("left_interact", "Left Interact Icon", () => null);
 		[AutoRegisterConfigKey]
-		private static ModConfigurationKey<Uri> LEFT_SLIDER_BOTH = new ModConfigurationKey<Uri>("left_double_slider", "Left Double Slider Icon", () => null);
+		private static ModConfigurationKey<Uri>   LEFT_SLIDER_BOTH = new ModConfigurationKey<Uri>("left_double_slider", "Left Double Slider Icon", () => null);
 		[AutoRegisterConfigKey]
-		private static ModConfigurationKey<Uri> LEFT_SLIDER_HORIZONTAL = new ModConfigurationKey<Uri>("left_slider_horizontal", "Left Slider Horizontal Icon", () => null);
+		private static ModConfigurationKey<Uri>   LEFT_SLIDER_HORIZONTAL = new ModConfigurationKey<Uri>("left_slider_horizontal", "Left Slider Horizontal Icon", () => null);
 		[AutoRegisterConfigKey]
-		private static ModConfigurationKey<Uri> LEFT_SLIDER_VERTICAL = new ModConfigurationKey<Uri>("left_slider_vertical", "Left Slider Vertical Icon", () => null);
+		private static ModConfigurationKey<Uri>   LEFT_SLIDER_VERTICAL = new ModConfigurationKey<Uri>("left_slider_vertical", "Left Slider Vertical Icon", () => null);
 		[AutoRegisterConfigKey]
-		private static ModConfigurationKey<Uri> LEFT_TYPING = new ModConfigurationKey<Uri>("left_typing", "Left Typing Icon", () => null);
+		private static ModConfigurationKey<Uri>   LEFT_TYPING = new ModConfigurationKey<Uri>("left_typing", "Left Typing Icon", () => null);
+
+
+
+
+
 
 
 		public override void OnEngineInit()
@@ -127,8 +132,7 @@ namespace LaserRecolorJank
 			config.OnThisConfigurationChanged += OnConfigurationUpdate;
 
 			Harmony harmony = new Harmony("apnda.lasercolor.jank");
-			harmony.PatchAll();
-		}
+			harmony.PatchAll(); }
 
 		[HarmonyPatch(typeof(InteractionLaser))]
 		class InteractionLaserJank
@@ -143,89 +147,89 @@ namespace LaserRecolorJank
 			{
 				__instance.RunInUpdates(3, () =>
 						{
-							if (!config.GetValue(ENABLED)) return;
-							if (__instance.Slot.ActiveUserRoot.ActiveUser != __instance.LocalUser) return;
+						if (!config.GetValue(ENABLED)) return;
+						if (__instance.Slot.ActiveUserRoot.ActiveUser != __instance.LocalUser) return;
 
-							var Assets = __instance.Slot.AddSlot("Assets");
-							var ColE = Assets.AttachComponent<ValueField<colorX>>();
-							var ColS = Assets.AttachComponent<ValueField<colorX>>();
-							var Mesh = Assets.AttachComponent<BentTubeMesh>();
-							var Renderer = __instance.Slot.GetComponent<MeshRenderer>().Mesh;
+						var Assets = __instance.Slot.AddSlot("Assets");
+						var ColE = Assets.AttachComponent<ValueField<colorX>>();
+						var ColS = Assets.AttachComponent<ValueField<colorX>>();
+						var Mesh = Assets.AttachComponent<BentTubeMesh>();
+						var Renderer = __instance.Slot.GetComponent<MeshRenderer>().Mesh;
 
-							Renderer.Target = Mesh;
-							Mesh.Radius.Value = 0.002f;
-							Mesh.Sides.Value = 6;
-							Mesh.Segments.Value = 16;
+						Renderer.Target = Mesh;
+						Mesh.Radius.Value = 0.002f;
+						Mesh.Sides.Value = 6;
+						Mesh.Segments.Value = 16;
 
-							____startColor.Value = ColS.Value.ReferenceID;
-							____endColor.Value = ColE.Value.ReferenceID;
+						____startColor.Value = ColS.Value.ReferenceID;
+						____endColor.Value = ColE.Value.ReferenceID;
 
-							____directPoint.ForceLink(Mesh.DirectTargetPoint);
-							____actualPoint.ForceLink(Mesh.ActualTargetPoint);
+						____directPoint.ForceLink(Mesh.DirectTargetPoint);
+						____actualPoint.ForceLink(Mesh.ActualTargetPoint);
 
-							var IsRight = __instance.Side == Chirality.Right;
-							var sc = IsRight ? config.GetValue(RIGHT_NEAR) : config.GetValue(LEFT_NEAR);
-							var ec = IsRight ? config.GetValue(RIGHT_FAR) : config.GetValue(LEFT_FAR);
-							var sv = IsRight ? config.GetValue(RIGHT_NEAR_VAR) : config.GetValue(LEFT_NEAR_VAR);
-							var ev = IsRight ? config.GetValue(RIGHT_FAR_VAR) : config.GetValue(LEFT_FAR_VAR);
+						var IsRight = __instance.Side == Chirality.Right;
+						var sc = IsRight ? config.GetValue(RIGHT_NEAR) : config.GetValue(LEFT_NEAR);
+						var ec = IsRight ? config.GetValue(RIGHT_FAR)  : config.GetValue(LEFT_FAR);
+						var sv = IsRight ? config.GetValue(RIGHT_NEAR_VAR) : config.GetValue(LEFT_NEAR_VAR);
+						var ev = IsRight ? config.GetValue(RIGHT_FAR_VAR)  : config.GetValue(LEFT_FAR_VAR);
 
-							Mesh.StartPointColor.Value = sc;
-							Mesh.EndPointColor.Value = ec;
+						Mesh.StartPointColor.Value = sc;
+						Mesh.EndPointColor.Value = ec;   
 
-							var ReactiveToggle = Assets.AttachComponent<ValueField<bool>>();
-							ReactiveToggle.Value.Value = config.GetValue(REACTIVE);
-							ReactiveEnableds.Add(ReactiveToggle.Value);
-							ReactiveToggle.Disposing += (field) => { ReactiveEnableds.Remove(ReactiveToggle.Value); };
+						var ReactiveToggle = Assets.AttachComponent<ValueField<bool>>();
+						ReactiveToggle.Value.Value = config.GetValue(REACTIVE);
+						ReactiveEnableds.Add(ReactiveToggle.Value); 
+						ReactiveToggle.Disposing += (field) => {ReactiveEnableds.Remove(ReactiveToggle.Value); }; 
 
-							var Start = SetUpLogix(Assets, ColS.Value, Mesh.StartPointColor, sc, ReactiveToggle, true);
-							var End = SetUpLogix(Assets, ColE.Value, Mesh.EndPointColor, ec, ReactiveToggle, false);
+						var Start = SetUpLogix(Assets, ColS.Value, Mesh.StartPointColor, sc, ReactiveToggle, true );
+						var End   = SetUpLogix(Assets, ColE.Value, Mesh.EndPointColor,   ec, ReactiveToggle, false);
 
-							var FStart = Start.Slot.AttachComponent<DynamicField<colorX>>();
-							var FEnd = End.Slot.AttachComponent<DynamicField<colorX>>();
+						var FStart = Start.Slot.AttachComponent<DynamicField<colorX>>();
+						var FEnd   = End.Slot.AttachComponent<DynamicField<colorX>>();
 
-							FStart.VariableName.Value = sv;
-							FEnd.VariableName.Value = ev;
+						FStart.VariableName.Value = sv;
+						FEnd.VariableName.Value   = ev;
 
-							FStart.TargetField.Target = Start.Value;
-							FEnd.TargetField.Target = End.Value;
+						FStart.TargetField.Target = Start.Value;
+						FEnd.TargetField.Target   = End.Value;
 
 
 
-							if (IsRight)
-							{
-								RightNearColors.Add(Start.Value);
-								Start.Disposing += (field) => { RightNearColors.Remove(Start.Value); };
-								RightFarColors.Add(End.Value);
-								End.Disposing += (field) => { RightFarColors.Remove(End.Value); };
-								RightNearVars.Add(FStart.VariableName);
-								Start.Disposing += (field) => { RightNearVars.Remove(FStart.VariableName); };
-								RightFarVars.Add(FEnd.VariableName);
-								End.Disposing += (field) => { RightFarVars.Remove(FEnd.VariableName); };
-							}
-							else
-							{
-								LeftNearColors.Add(Start.Value);
-								Start.Disposing += (field) => { LeftNearColors.Remove(Start.Value); };
-								LeftFarColors.Add(End.Value);
-								End.Disposing += (field) => { LeftFarColors.Remove(End.Value); };
-								LeftNearVars.Add(FStart.VariableName);
-								Start.Disposing += (field) => { LeftNearVars.Remove(FStart.VariableName); };
-								LeftFarVars.Add(FEnd.VariableName);
-								End.Disposing += (field) => { LeftFarVars.Remove(FEnd.VariableName); };
-							}
+						if (IsRight)
+						{
+							RightNearColors.Add(Start.Value);
+							Start.Disposing += (field) => {RightNearColors.Remove(Start.Value);};
+							RightFarColors.Add(End.Value);
+							End.Disposing   += (field) => {RightFarColors.Remove(End.Value);};
+							RightNearVars.Add(FStart.VariableName);
+							Start.Disposing += (field) => {RightNearVars.Remove(FStart.VariableName);};
+							RightFarVars.Add(FEnd.VariableName);
+							End.Disposing   += (field) => {RightFarVars.Remove(FEnd.VariableName);};
+						} 
+						else 
+						{
+							LeftNearColors.Add(Start.Value);
+							Start.Disposing += (field) => {LeftNearColors.Remove(Start.Value);};
+							LeftFarColors.Add(End.Value);
+							End.Disposing   += (field) => {LeftFarColors.Remove(End.Value);};
+							LeftNearVars.Add(FStart.VariableName);
+							Start.Disposing += (field) => {LeftNearVars.Remove(FStart.VariableName);};
+							LeftFarVars.Add(FEnd.VariableName);
+							End.Disposing   += (field) => {LeftFarVars.Remove(FEnd.VariableName);};
+						}
 
-							__instance.Enabled = true;
+						__instance.Enabled = true;
 						});
 			}
 
 			[HarmonyPrefix]
 			[HarmonyPatch("UpdateCursor")]
-			static bool Prefix(InteractionLaser __instance,
+			static bool Prefix( InteractionLaser __instance,
 					SyncRef<StaticTexture2D> ____cursorTexture,
 					Sync<colorX> ____cursorTint,
 					SyncRef<Slot> ____cursorRoot,
-                    InteractionCursor? interactionCursor = null
-                    )
+					LaserCursor? cursor
+					) 
 			{
 				if (__instance.Slot.ActiveUserRoot.ActiveUser != __instance.LocalUser) return true;
 				if (!config.GetValue(ENABLED)) return true;
@@ -251,16 +255,16 @@ namespace LaserRecolorJank
 					config.GetValue(LEFT_SLIDER_VERTICAL),
 					config.GetValue(LEFT_TYPING)};
 
-				Uri[] DesiredCursors = IsRight ? RightCursors : LeftCursors;
+				Uri[] DesiredCursors = IsRight ? RightCursors : LeftCursors; 
 
 
-				var oldUri = ((interactionCursor != null) ? interactionCursor.GetValueOrDefault().icon : null) ?? OfficialAssets.Graphics.Icons.Laser.Cursor;
+				var oldUri = ((cursor != null) ? cursor.GetValueOrDefault().icon : null) ?? OfficialAssets.Graphics.Icons.Laser.Cursor;
 				var newUri = DesiredCursors[Array.IndexOf(DefaultCursors, oldUri)] ?? oldUri;
 
 
-				____cursorTexture.Target.URL.Value = newUri;
-				____cursorTint.Value = ((interactionCursor != null) ? interactionCursor.GetValueOrDefault().tint : colorX.White);
-				float num = ((interactionCursor != null) ? interactionCursor.GetValueOrDefault().size : 1f);
+				____cursorTexture.Target.URL.Value = newUri; 
+				____cursorTint.Value = ((cursor != null) ? cursor.GetValueOrDefault().tint : colorX.White);
+				float num = ((cursor != null) ? cursor.GetValueOrDefault().size : 1f);
 				float3 one = float3.One;
 				float3 @float = (one) * num * (IsRight ? config.GetValue(RIGHT_CURSOR_SCALE) : config.GetValue(LEFT_CURSOR_SCALE));
 				____cursorRoot.Target.LocalScale = @float;
@@ -276,27 +280,27 @@ namespace LaserRecolorJank
 				Sync<colorX> Field,
 				colorX Desired,
 				ValueField<bool> ReactiveToggle,
-				bool IsStart)
+				bool IsStart) 
 		{
 			// Field <= (Input / Default) * Desired
 			// This should be LogiX so the color is actually networked.
-			var driver = root.AddSlot(IsStart ? "Start" : "End");
+			var driver = root.AddSlot(IsStart? "Start" : "End");
 
 			var InputSource = driver.AttachComponent<ValueSource<colorX>>();
-			InputSource.TrySetRootSource(Input);
+				InputSource.TrySetRootSource(Input);
 
 			var Default = driver.AttachComponent<ValueField<colorX>>();
-			Default.Value.Value = new colorX(.25f, 1f, 1f, 1f);
+				Default.Value.Value = new colorX(.25f, 1f, 1f, 1f);
 			var DefaultSource = driver.AttachComponent<ValueSource<colorX>>();
-			DefaultSource.TrySetRootSource(Default.Value);
+				DefaultSource.TrySetRootSource(Default.Value);
 
 			var DesiredField = driver.AttachComponent<ValueField<colorX>>();
-			DesiredField.Value.Value = Desired;
+				DesiredField.Value.Value = Desired;
 			var DesiredSource = driver.AttachComponent<ValueSource<colorX>>();
-			DesiredSource.TrySetRootSource(DesiredField.Value);
+				DesiredSource.TrySetRootSource(DesiredField.Value);
 
 			var ReactiveSource = driver.AttachComponent<ValueSource<bool>>();
-			ReactiveSource.TrySetRootSource(ReactiveToggle.Value);
+				ReactiveSource.TrySetRootSource(ReactiveToggle.Value);
 
 			var Div = driver.AttachComponent<ValueDiv<colorX>>();
 			var Mul = driver.AttachComponent<ValueMul<colorX>>();
@@ -309,45 +313,49 @@ namespace LaserRecolorJank
 
 
 			var Conditional = driver.AttachComponent<ValueConditional<colorX>>();
-			Conditional.OnTrue.TrySet(Mul);
-			Conditional.OnFalse.TrySet(DesiredSource);
-			Conditional.Condition.TrySet(ReactiveSource);
+				Conditional.OnTrue.TrySet(Mul);
+				Conditional.OnFalse.TrySet(DesiredSource);
+				Conditional.Condition.TrySet(ReactiveSource);
 
 
 			var Driver = driver.AttachComponent<ValueFieldDrive<colorX>>();
-			Driver.Value.TrySet(Conditional);
-			Driver.TrySetRootTarget(Field);
+				Driver.Value.TrySet(Conditional);
+				Driver.TrySetRootTarget(Field);
 
 			return DesiredField;
+
+
 		}
 
 		void OnConfigurationUpdate(ConfigurationChangedEvent @event)
 		{
-			if (!config.GetValue(ENABLED))
+			if (!config.GetValue(ENABLED)) 
 			{
-				var DefaultColor = new colorX(.25f, 1f, 1f, 1f);
-				foreach (Sync<bool> b in ReactiveEnableds) { b.World.RunSynchronously(delegate { b.Value = true; }); };
-                foreach (Sync<colorX> c in RightNearColors) { c.World.RunSynchronously(delegate { c.Value = DefaultColor; }); };
-				foreach (Sync<colorX> c in RightFarColors) { c.World.RunSynchronously(delegate { c.Value = DefaultColor; }); };
-				foreach (Sync<colorX> c in LeftNearColors) { c.World.RunSynchronously(delegate { c.Value = DefaultColor; }); };
-				foreach (Sync<colorX> c in LeftFarColors) { c.World.RunSynchronously(delegate { c.Value = DefaultColor; }); };
-				foreach (Sync<string> s in RightFarVars) { s.World.RunSynchronously(delegate { s.Value = null; }); };
-				foreach (Sync<string> s in RightNearVars) { s.World.RunSynchronously(delegate { s.Value = null; }); };
-				foreach (Sync<string> s in LeftFarVars) { s.World.RunSynchronously(delegate { s.Value = null; }); };
-				foreach (Sync<string> s in LeftNearVars) { s.World.RunSynchronously(delegate { s.Value = null; }); };
+				var DefaultColor = new colorX(.25f,1f,1f,1f);
+				foreach(Sync<bool> b in ReactiveEnableds ) { b.Value = true;         };
+				foreach(Sync<colorX> c in RightNearColors ) { c.Value = DefaultColor; };
+				foreach(Sync<colorX> c in RightFarColors  ) { c.Value = DefaultColor; };
+				foreach(Sync<colorX> c in LeftNearColors  ) { c.Value = DefaultColor; };
+				foreach(Sync<colorX> c in LeftFarColors   ) { c.Value = DefaultColor; };
+				foreach(Sync<string> s in RightFarVars   ) { s.Value = null; };
+				foreach(Sync<string> s in RightNearVars  ) { s.Value = null; };
+				foreach(Sync<string> s in LeftFarVars    ) { s.Value = null; };
+				foreach(Sync<string> s in LeftNearVars   ) { s.Value = null; };
 			}
-			else
+			else 
 			{
-				foreach (Sync<bool> b in ReactiveEnableds) { if (!b.Value == config.GetValue(REACTIVE)) b.World.RunSynchronously(delegate { b.Value = config.GetValue(REACTIVE); }); };
-				foreach (Sync<colorX> c in RightNearColors) { if (!(c.Value == config.GetValue(RIGHT_NEAR))) c.World.RunSynchronously(delegate { c.Value = config.GetValue(RIGHT_NEAR); });};
-				foreach (Sync<colorX> c in RightFarColors) { if (!(c.Value == config.GetValue(RIGHT_FAR))) c.World.RunSynchronously(delegate { c.Value = config.GetValue(RIGHT_FAR); }); };
-				foreach (Sync<colorX> c in LeftNearColors) { if (!(c.Value == config.GetValue(LEFT_NEAR))) c.World.RunSynchronously(delegate { c.Value = config.GetValue(LEFT_NEAR); }); };
-				foreach (Sync<colorX> c in LeftFarColors) { if ( !(c.Value == config.GetValue(LEFT_FAR))) c.World.RunSynchronously(delegate { c.Value = config.GetValue(LEFT_FAR); }); };
-				foreach (Sync<string> s in RightNearVars) { if ( !(s.Value == config.GetValue(RIGHT_NEAR_VAR))) s.World.RunSynchronously(delegate { s.Value = config.GetValue(RIGHT_NEAR_VAR); }); };
-				foreach (Sync<string> s in RightFarVars) { if ( !(s.Value == config.GetValue(RIGHT_FAR_VAR))) s.World.RunSynchronously(delegate { s.Value = config.GetValue(RIGHT_FAR_VAR); }); };
-				foreach (Sync<string> s in LeftNearVars) { if ( !(s.Value == config.GetValue(LEFT_NEAR_VAR))) s.World.RunSynchronously(delegate { s.Value = config.GetValue(LEFT_NEAR_VAR); }); };
-				foreach (Sync<string> s in LeftFarVars) { if ( !(s.Value == config.GetValue(LEFT_FAR_VAR))) s.World.RunSynchronously(delegate { s.Value = config.GetValue(LEFT_FAR_VAR); }); };					
+
+				foreach(Sync<bool> b in ReactiveEnableds) { if ( !b.Value == config.GetValue(REACTIVE  ))  b.Value = config.GetValue(REACTIVE  );};
+				foreach(Sync<colorX> c in RightNearColors) { if (!(c.Value == config.GetValue(RIGHT_NEAR))) c.Value = config.GetValue(RIGHT_NEAR);};
+				foreach(Sync<colorX> c in RightFarColors ) { if (!(c.Value == config.GetValue(RIGHT_FAR ))) c.Value = config.GetValue(RIGHT_FAR );};
+				foreach(Sync<colorX> c in LeftNearColors ) { if (!(c.Value == config.GetValue(LEFT_NEAR ))) c.Value = config.GetValue(LEFT_NEAR );};
+				foreach(Sync<colorX> c in LeftFarColors  ) { if (!(c.Value == config.GetValue(LEFT_FAR  ))) c.Value = config.GetValue(LEFT_FAR  );};
+				foreach(Sync<string> s in RightNearVars ) { if (!(s.Value == config.GetValue(RIGHT_NEAR_VAR))) s.Value = config.GetValue(RIGHT_NEAR_VAR);};
+				foreach(Sync<string> s in RightFarVars  ) { if (!(s.Value == config.GetValue(RIGHT_FAR_VAR ))) s.Value = config.GetValue(RIGHT_FAR_VAR );}; 
+				foreach(Sync<string> s in LeftNearVars  ) { if (!(s.Value == config.GetValue(LEFT_NEAR_VAR ))) s.Value = config.GetValue(LEFT_NEAR_VAR );};
+				foreach(Sync<string> s in LeftFarVars   ) { if (!(s.Value == config.GetValue(LEFT_FAR_VAR  ))) s.Value = config.GetValue(LEFT_FAR_VAR  );};
 			}
+
 		}
 	}
 }
