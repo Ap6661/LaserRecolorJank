@@ -228,7 +228,7 @@ namespace LaserRecolorJank
 					SyncRef<StaticTexture2D> ____cursorTexture,
 					Sync<colorX> ____cursorTint,
 					SyncRef<Slot> ____cursorRoot,
-					LaserCursor? cursor
+					InteractionCursor? interactionCursor
 					) 
 			{
 				if (__instance.Slot.ActiveUserRoot.ActiveUser != __instance.LocalUser) return true;
@@ -258,13 +258,13 @@ namespace LaserRecolorJank
 				Uri[] DesiredCursors = IsRight ? RightCursors : LeftCursors; 
 
 
-				var oldUri = ((cursor != null) ? cursor.GetValueOrDefault().icon : null) ?? OfficialAssets.Graphics.Icons.Laser.Cursor;
+				var oldUri = ((interactionCursor != null) ? interactionCursor.GetValueOrDefault().icon : null) ?? OfficialAssets.Graphics.Icons.Laser.Cursor;
 				var newUri = DesiredCursors[Array.IndexOf(DefaultCursors, oldUri)] ?? oldUri;
 
 
 				____cursorTexture.Target.URL.Value = newUri; 
-				____cursorTint.Value = ((cursor != null) ? cursor.GetValueOrDefault().tint : colorX.White);
-				float num = ((cursor != null) ? cursor.GetValueOrDefault().size : 1f);
+				____cursorTint.Value = ((interactionCursor != null) ? interactionCursor.GetValueOrDefault().tint : colorX.White);
+				float num = ((interactionCursor != null) ? interactionCursor.GetValueOrDefault().size : 1f);
 				float3 one = float3.One;
 				float3 @float = (one) * num * (IsRight ? config.GetValue(RIGHT_CURSOR_SCALE) : config.GetValue(LEFT_CURSOR_SCALE));
 				____cursorRoot.Target.LocalScale = @float;
@@ -331,29 +331,28 @@ namespace LaserRecolorJank
 		{
 			if (!config.GetValue(ENABLED)) 
 			{
-				var DefaultColor = new colorX(.25f,1f,1f,1f);
-				foreach(Sync<bool> b in ReactiveEnableds ) { b.Value = true;         };
-				foreach(Sync<colorX> c in RightNearColors ) { c.Value = DefaultColor; };
-				foreach(Sync<colorX> c in RightFarColors  ) { c.Value = DefaultColor; };
-				foreach(Sync<colorX> c in LeftNearColors  ) { c.Value = DefaultColor; };
-				foreach(Sync<colorX> c in LeftFarColors   ) { c.Value = DefaultColor; };
-				foreach(Sync<string> s in RightFarVars   ) { s.Value = null; };
-				foreach(Sync<string> s in RightNearVars  ) { s.Value = null; };
-				foreach(Sync<string> s in LeftFarVars    ) { s.Value = null; };
-				foreach(Sync<string> s in LeftNearVars   ) { s.Value = null; };
+				var DefaultColor = new colorX(.25f, 1f, 1f, 1f);
+				foreach (Sync<bool> b in ReactiveEnableds) { b.World.RunSynchronously(delegate { b.Value = true; }); };
+		    		foreach (Sync<colorX> c in RightNearColors) { c.World.RunSynchronously(delegate { c.Value = DefaultColor; }); };
+				foreach (Sync<colorX> c in RightFarColors) { c.World.RunSynchronously(delegate { c.Value = DefaultColor; }); };
+				foreach (Sync<colorX> c in LeftNearColors) { c.World.RunSynchronously(delegate { c.Value = DefaultColor; }); };
+				foreach (Sync<colorX> c in LeftFarColors) { c.World.RunSynchronously(delegate { c.Value = DefaultColor; }); };
+				foreach (Sync<string> s in RightFarVars) { s.World.RunSynchronously(delegate { s.Value = null; }); };
+				foreach (Sync<string> s in RightNearVars) { s.World.RunSynchronously(delegate { s.Value = null; }); };
+				foreach (Sync<string> s in LeftFarVars) { s.World.RunSynchronously(delegate { s.Value = null; }); };
+				foreach (Sync<string> s in LeftNearVars) { s.World.RunSynchronously(delegate { s.Value = null; }); };
 			}
 			else 
 			{
-
-				foreach(Sync<bool> b in ReactiveEnableds) { if ( !b.Value == config.GetValue(REACTIVE  ))  b.Value = config.GetValue(REACTIVE  );};
-				foreach(Sync<colorX> c in RightNearColors) { if (!(c.Value == config.GetValue(RIGHT_NEAR))) c.Value = config.GetValue(RIGHT_NEAR);};
-				foreach(Sync<colorX> c in RightFarColors ) { if (!(c.Value == config.GetValue(RIGHT_FAR ))) c.Value = config.GetValue(RIGHT_FAR );};
-				foreach(Sync<colorX> c in LeftNearColors ) { if (!(c.Value == config.GetValue(LEFT_NEAR ))) c.Value = config.GetValue(LEFT_NEAR );};
-				foreach(Sync<colorX> c in LeftFarColors  ) { if (!(c.Value == config.GetValue(LEFT_FAR  ))) c.Value = config.GetValue(LEFT_FAR  );};
-				foreach(Sync<string> s in RightNearVars ) { if (!(s.Value == config.GetValue(RIGHT_NEAR_VAR))) s.Value = config.GetValue(RIGHT_NEAR_VAR);};
-				foreach(Sync<string> s in RightFarVars  ) { if (!(s.Value == config.GetValue(RIGHT_FAR_VAR ))) s.Value = config.GetValue(RIGHT_FAR_VAR );}; 
-				foreach(Sync<string> s in LeftNearVars  ) { if (!(s.Value == config.GetValue(LEFT_NEAR_VAR ))) s.Value = config.GetValue(LEFT_NEAR_VAR );};
-				foreach(Sync<string> s in LeftFarVars   ) { if (!(s.Value == config.GetValue(LEFT_FAR_VAR  ))) s.Value = config.GetValue(LEFT_FAR_VAR  );};
+				foreach (Sync<bool> b in ReactiveEnableds) { if (!b.Value == config.GetValue(REACTIVE)) b.World.RunSynchronously(delegate { b.Value = config.GetValue(REACTIVE); }); };
+				foreach (Sync<colorX> c in RightNearColors) { if (!(c.Value == config.GetValue(RIGHT_NEAR))) c.World.RunSynchronously(delegate { c.Value = config.GetValue(RIGHT_NEAR); });};
+				foreach (Sync<colorX> c in RightFarColors) { if (!(c.Value == config.GetValue(RIGHT_FAR))) c.World.RunSynchronously(delegate { c.Value = config.GetValue(RIGHT_FAR); }); };
+				foreach (Sync<colorX> c in LeftNearColors) { if (!(c.Value == config.GetValue(LEFT_NEAR))) c.World.RunSynchronously(delegate { c.Value = config.GetValue(LEFT_NEAR); }); };
+				foreach (Sync<colorX> c in LeftFarColors) { if ( !(c.Value == config.GetValue(LEFT_FAR))) c.World.RunSynchronously(delegate { c.Value = config.GetValue(LEFT_FAR); }); };
+				foreach (Sync<string> s in RightNearVars) { if ( !(s.Value == config.GetValue(RIGHT_NEAR_VAR))) s.World.RunSynchronously(delegate { s.Value = config.GetValue(RIGHT_NEAR_VAR); }); };
+				foreach (Sync<string> s in RightFarVars) { if ( !(s.Value == config.GetValue(RIGHT_FAR_VAR))) s.World.RunSynchronously(delegate { s.Value = config.GetValue(RIGHT_FAR_VAR); }); };
+				foreach (Sync<string> s in LeftNearVars) { if ( !(s.Value == config.GetValue(LEFT_NEAR_VAR))) s.World.RunSynchronously(delegate { s.Value = config.GetValue(LEFT_NEAR_VAR); }); };
+				foreach (Sync<string> s in LeftFarVars) { if ( !(s.Value == config.GetValue(LEFT_FAR_VAR))) s.World.RunSynchronously(delegate { s.Value = config.GetValue(LEFT_FAR_VAR); }); };			
 			}
 
 		}
