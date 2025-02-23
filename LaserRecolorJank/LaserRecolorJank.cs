@@ -23,7 +23,7 @@ namespace LaserRecolorJank
 
 		public override String Link => "https://github.com/Ap6661/LaserRecolorJank";
 
-		public override String Version => "2.0.2";
+		public override String Version => "2.0.4";
 
 		private static Uri[] DefaultCursors = { OfficialAssets.Graphics.Icons.Laser.Cursor,
 			OfficialAssets.Graphics.Icons.Laser.GrabCursor,
@@ -67,8 +67,6 @@ namespace LaserRecolorJank
 		private static ModConfigurationKey<string> RIGHT_FAR_VAR = new ModConfigurationKey<string>("right_far_var", "Right Far Color Dynamic Variable", () => "");
 
 		[AutoRegisterConfigKey]
-		private static ModConfigurationKey<float>   RIGHT_CURSOR_SCALE = new ModConfigurationKey<float>("right_cursor_scale", "The scale of the right cursor", () => 1F);
-		[AutoRegisterConfigKey]
 		private static ModConfigurationKey<Uri>   RIGHT_CURSOR = new ModConfigurationKey<Uri>("right_cursor", "Right Cursor Icon", () => null);
 		[AutoRegisterConfigKey]
 		private static ModConfigurationKey<Uri>   RIGHT_GRAB = new ModConfigurationKey<Uri>("right_grab", "Right Grab Icon", () => null);
@@ -98,8 +96,6 @@ namespace LaserRecolorJank
 		[AutoRegisterConfigKey]
 		private static ModConfigurationKey<string> LEFT_FAR_VAR = new ModConfigurationKey<string>("left_far_var", "Left Far Color Dynamic Variable", () => "");
 
-		[AutoRegisterConfigKey]
-		private static ModConfigurationKey<float>   LEFT_CURSOR_SCALE = new ModConfigurationKey<float>("left_cursor_scale", "The scale of the left cursor", () => 1F);
 		[AutoRegisterConfigKey]
 		private static ModConfigurationKey<Uri>   LEFT_CURSOR = new ModConfigurationKey<Uri>("left_cursor", "Left Cursor Icon", () => null);
 		[AutoRegisterConfigKey]
@@ -228,49 +224,67 @@ namespace LaserRecolorJank
 					SyncRef<StaticTexture2D> ____cursorTexture,
 					Sync<colorX> ____cursorTint,
 					SyncRef<Slot> ____cursorRoot,
+					SyncRef<Slot> ____cursorImageRoot,
+					SyncRef<Slot> ____directCursorImageRoot,
+					SyncRef<SegmentMesh> ____directLineMesh,
 					InteractionCursor? interactionCursor
 					) 
 			{
-				if (__instance.Slot.ActiveUserRoot.ActiveUser != __instance.LocalUser) return true;
-				if (!config.GetValue(ENABLED)) return true;
-				if (!config.GetValue(CURSOR_ENABLED)) return true;
+        if (__instance.Slot.ActiveUserRoot.ActiveUser != __instance.LocalUser) return true;
+        if (!config.GetValue(ENABLED)) return true;
+        if (!config.GetValue(CURSOR_ENABLED)) return true;
 
-				var IsRight = __instance.Side == Chirality.Right;
+        var IsRight = __instance.Side == Chirality.Right;
 
-				Uri[] RightCursors =   {config.GetValue(RIGHT_CURSOR),
-					config.GetValue(RIGHT_GRAB),
-					config.GetValue(RIGHT_GRAB_HOVER),
-					config.GetValue(RIGHT_INTERACT),
-					config.GetValue(RIGHT_SLIDER_BOTH),
-					config.GetValue(RIGHT_SLIDER_HORIZONTAL),
-					config.GetValue(RIGHT_SLIDER_VERTICAL),
-					config.GetValue(RIGHT_TYPING)};
+        Uri[] RightCursors =   {config.GetValue(RIGHT_CURSOR),
+          config.GetValue(RIGHT_GRAB),
+          config.GetValue(RIGHT_GRAB_HOVER),
+          config.GetValue(RIGHT_INTERACT),
+          config.GetValue(RIGHT_SLIDER_BOTH),
+          config.GetValue(RIGHT_SLIDER_HORIZONTAL),
+          config.GetValue(RIGHT_SLIDER_VERTICAL),
+          config.GetValue(RIGHT_TYPING)};
 
-				Uri[] LeftCursors =    {config.GetValue(LEFT_CURSOR),
-					config.GetValue(LEFT_GRAB),
-					config.GetValue(LEFT_GRAB_HOVER),
-					config.GetValue(LEFT_INTERACT),
-					config.GetValue(LEFT_SLIDER_BOTH),
-					config.GetValue(LEFT_SLIDER_HORIZONTAL),
-					config.GetValue(LEFT_SLIDER_VERTICAL),
-					config.GetValue(LEFT_TYPING)};
+        Uri[] LeftCursors =    {config.GetValue(LEFT_CURSOR),
+          config.GetValue(LEFT_GRAB),
+          config.GetValue(LEFT_GRAB_HOVER),
+          config.GetValue(LEFT_INTERACT),
+          config.GetValue(LEFT_SLIDER_BOTH),
+          config.GetValue(LEFT_SLIDER_HORIZONTAL),
+          config.GetValue(LEFT_SLIDER_VERTICAL),
+          config.GetValue(LEFT_TYPING)};
 
-				Uri[] DesiredCursors = IsRight ? RightCursors : LeftCursors; 
-
-
-				var oldUri = ((interactionCursor != null) ? interactionCursor.GetValueOrDefault().icon : null) ?? OfficialAssets.Graphics.Icons.Laser.Cursor;
-				var newUri = DesiredCursors[Array.IndexOf(DefaultCursors, oldUri)] ?? oldUri;
+        Uri[] DesiredCursors = IsRight ? RightCursors : LeftCursors; 
 
 
-				____cursorTexture.Target.URL.Value = newUri; 
-				____cursorTint.Value = ((interactionCursor != null) ? interactionCursor.GetValueOrDefault().tint : colorX.White);
-				float num = ((interactionCursor != null) ? interactionCursor.GetValueOrDefault().size : 1f);
-				float3 one = float3.One;
-				float3 @float = (one) * num * (IsRight ? config.GetValue(RIGHT_CURSOR_SCALE) : config.GetValue(LEFT_CURSOR_SCALE));
-				____cursorRoot.Target.LocalScale = @float;
+        __instance.CurrentCursor = interactionCursor;
+        InteractionCursor? interactionCursor2 = interactionCursor;
+        InteractionCursor interactionCursor3;
+        if (interactionCursor2 == null)
+        {
+          IInteractionCursorFactory cursorFactory = __instance.CursorFactory;
+          interactionCursor3 = ((cursorFactory != null) ? cursorFactory.Default(1f, null) : InteractionCursor.Default);
+        }
+        else
+        {
+          interactionCursor3 = interactionCursor2.GetValueOrDefault();
+        }
+        InteractionCursor interactionCursor4 = interactionCursor3;
+
+        var oldUri = interactionCursor4.icon;;
+        var newUri = DesiredCursors[Array.IndexOf(DefaultCursors, oldUri)] ?? oldUri;
+
+        ____cursorTexture.Target.URL.Value = newUri; 
+        ____cursorTint.Value = interactionCursor4.tint;
+        float size = interactionCursor4.size;
+        float3 one = float3.One;
+        float3 @float = one * size;
+        ____cursorImageRoot.Target.LocalScale = @float;
+        ____directCursorImageRoot.Target.LocalScale = (@float) * 0.75f;
+        ____directLineMesh.Target.Radius.Value = size * 0.05f;
 
 
-				return false;
+        return false;
 			}
 
 		}
