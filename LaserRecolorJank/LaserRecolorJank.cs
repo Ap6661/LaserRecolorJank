@@ -7,6 +7,7 @@ using Elements.Core;
 using FrooxEngine.ProtoFlux.Runtimes.Execution.Nodes.Operators;
 using FrooxEngine.ProtoFlux.Runtimes.Execution.Nodes;
 using FrooxEngine.FrooxEngine.ProtoFlux.CoreNodes;
+using Renderite.Shared;
 
 
 
@@ -23,7 +24,7 @@ namespace LaserRecolorJank
 
 		public override String Link => "https://github.com/Ap6661/LaserRecolorJank";
 
-		public override String Version => "2.0.4";
+		public override String Version => "2.0.5";
 
 		private static Uri[] DefaultCursors = { OfficialAssets.Graphics.Icons.Laser.Cursor,
 			OfficialAssets.Graphics.Icons.Laser.GrabCursor,
