@@ -164,7 +164,8 @@ namespace LaserRecolorJank
 						____directPoint.ForceLink(Mesh.DirectTargetPoint);
 						____actualPoint.ForceLink(Mesh.ActualTargetPoint);
 
-						var IsRight = __instance.Side == Chirality.Right;
+						var side = __instance.AssociatedTool == null ? Chirality.Right : __instance.Side;
+						var IsRight = side == Chirality.Right;
 						var sc = IsRight ? config.GetValue(RIGHT_NEAR) : config.GetValue(LEFT_NEAR);
 						var ec = IsRight ? config.GetValue(RIGHT_FAR)  : config.GetValue(LEFT_FAR);
 						var sv = IsRight ? config.GetValue(RIGHT_NEAR_VAR) : config.GetValue(LEFT_NEAR_VAR);
@@ -235,7 +236,8 @@ namespace LaserRecolorJank
         if (!config.GetValue(ENABLED)) return true;
         if (!config.GetValue(CURSOR_ENABLED)) return true;
 
-        var IsRight = __instance.Side == Chirality.Right;
+        var side = __instance.AssociatedTool == null ? Chirality.Right : __instance.Side;
+        var IsRight = side == Chirality.Right;
 
         Uri[] RightCursors =   {config.GetValue(RIGHT_CURSOR),
           config.GetValue(RIGHT_GRAB),
