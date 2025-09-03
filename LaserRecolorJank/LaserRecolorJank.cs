@@ -24,7 +24,7 @@ namespace LaserRecolorJank
 
 		public override String Link => "https://github.com/Ap6661/LaserRecolorJank";
 
-		public override String Version => "2.0.5";
+		public override String Version => "2.0.6";
 
 		private static Uri[] DefaultCursors = { OfficialAssets.Graphics.Icons.Laser.Cursor,
 			OfficialAssets.Graphics.Icons.Laser.GrabCursor,
